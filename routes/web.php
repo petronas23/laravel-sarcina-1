@@ -20,3 +20,4 @@ Route::get('edit-city', 'CityController@edit_city');
 Route::get('cities-list', 'CityController@get_cities');
 Route::get('add-country', 'CountryController@form_add_country');
 Route::get('add_country', 'CountryController@add_country');
+Route::get('show-countries', 'CountryController@get_all_countries');

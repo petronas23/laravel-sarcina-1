@@ -9,16 +9,30 @@ Cod <input type="text" name="country_cod"><br><br>
 $( "#add_country" ).submit(function(e) {
   e.preventDefault();
   let data = $(this).serialize();
-	 console.log(data);
-  $.ajax({
-	 
+  
+  $.ajax({ 
     type: "GET",
     url: "http://poo-lab/add_country",
     data: data,
     success: function(msg){
-		console.log(msg);
-        alert(msg);
+		let message = "";
+		if(msg.success == false){
+			let x;
+			for (x in msg.errors.original) {
+				message += msg.errors.original[x] + '\n';
+			}
+		}
+		
+		if(msg.success == true){
+			message = msg.message;
+		}
+	alert(message);
+	},
+ 	
+	error: function() {
+       alert('Error please try again');
     }
+	
 	});
 });
 
