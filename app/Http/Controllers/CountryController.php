@@ -37,11 +37,6 @@ class CountryController extends Controller
 		
 		$countriesobj = new Country();
 		$countriesobj->insert_country($to_insert);
-
-		
-		/*db::table('country')->insert(
-			$to_insert
-		);*/
 		
 		return response()->json([
 			'success' => true,
@@ -52,12 +47,8 @@ class CountryController extends Controller
     function get_all_countries()
     {
 		$countriesobj = new Country();
-		$countries = $countriesobj->get_all();
-		echo '<pre>';
-		print_r(json_decode($countries,true));
-			echo '</pre>';
-		die;
-
-		return view('country/add_country', $countries);
+		$data['countries'] = $countriesobj->get_all();
+		
+		return view('country/country', $data);
     }
 }

@@ -12,7 +12,7 @@ $( "#add_country" ).submit(function(e) {
   
   $.ajax({ 
     type: "GET",
-    url: "http://poo-lab/add_country",
+    url: "http://laravel-sarcina-1/add_country",
     data: data,
     success: function(msg){
 		let message = "";
@@ -25,9 +25,10 @@ $( "#add_country" ).submit(function(e) {
 		
 		if(msg.success == true){
 			message = msg.message;
+			window.location.replace('http://laravel-sarcina-1/show-countries');
 		}
 	alert(message);
-	window.location.replace('http://poo-lab/show-countries');
+	
 	},
  	
 	error: function() {
