@@ -1,9 +1,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<form action="/add_country" id="add_country">
-Denumire: <input type="text" name="country_name"><br><br>
-Cod <input type="text" name="country_cod"><br><br>
+<form action="" id="add_country">
+Country: <input type="text" name="country_name" value="<?=(isset($country) ? $country->country : '')?>"><br><br>
+Cod <input type="text" name="country_cod" value="<?=(isset($country) ? $country->cod : '')?>"><br><br>
+<input type="hidden" name="id_country" value="<?=(isset($country) ? $country->id : '')?>"><br>
 <input type="submit"><br>
 </form>
+
+<a href="http://laravel-sarcina-1/countries-list"> Go to cities list </a>
 
 <script>
 $( "#add_country" ).submit(function(e) {
@@ -12,7 +15,7 @@ $( "#add_country" ).submit(function(e) {
   
   $.ajax({ 
     type: "GET",
-    url: "http://laravel-sarcina-1/add_country",
+    url: "http://laravel-sarcina-1/<?=(isset($country) ? 'edit_country' : 'add_country')?>",
     data: data,
     success: function(msg){
 		let message = "";
@@ -25,7 +28,7 @@ $( "#add_country" ).submit(function(e) {
 		
 		if(msg.success == true){
 			message = msg.message;
-			window.location.replace('http://laravel-sarcina-1/show-countries');
+			window.location.replace('http://laravel-sarcina-1/countries-list');
 		}
 	alert(message);
 	

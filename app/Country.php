@@ -20,4 +20,19 @@ class Country extends Model
 	{
 		return DB::table($this->table)->get();
 	}
+	
+	public function get_country($id)
+	{
+		return DB::table($this->table)->where('id', '=', $id)->first();
+	}
+	
+	public function update_country($to_update, $id)
+	{
+		DB::table($this->table)->where('id', $id)->update($to_update);
+	}
+	
+	public function delete_country($id)
+	{
+		DB::table($this->table)->where('id', '=', $id)->delete();
+	}
 }

@@ -1,9 +1,12 @@
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <table class="blueTable">
 <thead>
 <tr>
 <th>Country</th>
 <th>Cod</th>
+<th>Add new company</th>
+<th>Edit company</th>
+<th>Delete company</th>
 </tr>
 </thead>
 <tfoot>
@@ -16,9 +19,11 @@
 <tbody>
 	@foreach($countries  as $country)
 		<tr>
-			<td>{{$country->denumire}}</td>
+			<td>{{$country->country}}</td>
 			<td>{{$country->cod}}</td>
 			<td><a href="http://laravel-sarcina-1/add-country">Add Country</a></td>
+			<td><a href="http://laravel-sarcina-1/edit-country/{{$country->id}}">Edit Country</a></td>
+			<td><a class="delete_country" data-id="<?=$country->id?>" href="#">Delete Country</a></td>
 		</tr>
 	@endforeach
 </tbody>
@@ -84,3 +89,37 @@ table.blueTable tfoot .links a{
   border-radius: 5px;
 }
 </style>
+
+<script>
+$( ".delete_country" ).click(function(e) {
+		e.preventDefault();
+		
+		var id = $(this).data('id');
+		
+		var verify = confirm("Do you really want to delete it?");
+		if(verify){
+			$.ajax({
+				url: "http://laravel-sarcina-1/delete_country",
+				dataType: 'JSON',
+				type: "get",
+				data: {
+					id: id
+					},
+				success: function(msg){
+
+					let message = "";
+					if(msg.success == true){
+						message = msg.message;
+						window.location.reload();
+					}
+					
+				alert(message);
+					
+				},
+				error: function(){
+					alert('error');
+				}
+			})
+		}
+	})
+</script>
