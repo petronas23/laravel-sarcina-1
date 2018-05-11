@@ -35,7 +35,9 @@ class CountryController extends Controller
 				'cod' => $request->country_cod
 		];
 		
-		insert_country($to_insert);
+		$countriesobj = new Country();
+		$countriesobj->insert_country($to_insert);
+
 		
 		/*db::table('country')->insert(
 			$to_insert

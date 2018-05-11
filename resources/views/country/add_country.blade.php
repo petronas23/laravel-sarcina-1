@@ -27,6 +27,7 @@ $( "#add_country" ).submit(function(e) {
 			message = msg.message;
 		}
 	alert(message);
+	window.location.replace('http://poo-lab/show-countries');
 	},
  	
 	error: function() {
